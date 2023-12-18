@@ -127,27 +127,30 @@ const memeContainer = document.querySelector(".memeContainer");
 
 // opdr 5
 
-randomData = document.querySelector(".randomData")
+randomData = document.querySelector(".randomData");
 async function fetchData() {
   try {
-    const response = await fetch('https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8');
+    const response = await fetch(
+      "https://mocki.io/v1/d4867d8b-b5d5-4a48-a4ab-79131b5809b8"
+    );
     const data = await response.json();
     displayCards(data);
   } catch (error) {
-    console.error('Er is een fout opgetreden bij het ophalen van de gegevens:', error);
+    console.error(
+      "Er is een fout opgetreden bij het ophalen van de gegevens:",
+      error
+    );
   }
 }
 
 // Functie om kaarten weer te geven op de webpagina
 function displayCards(data) {
-  const cardsContainer = document.querySelector('.randomData');
+  const cardsContainer = document.querySelector(".randomData");
 
-  data.forEach(item => {
-    const card = document.createElement('div');
-    card.classList.add('card', item.location); // Voeg de locatieklasse toe
+  data.forEach((item) => {
+    const card = document.createElement("div");
+    card.classList.add("card", item.location); // Voeg de locatieklasse toe
 
-
-    
     // Creëer de kaartinhoud
     const cardContent = `
       <h2>${item.name}</h2>
@@ -161,3 +164,13 @@ function displayCards(data) {
 
 // Haal de gegevens op bij het laden van de pagina
 fetchData();
+
+// oefenopdrachten deel 2
+
+let bitcoins = [
+  {
+    value: 40604,
+    date: "11 dec",
+  },
+  {}
+];
