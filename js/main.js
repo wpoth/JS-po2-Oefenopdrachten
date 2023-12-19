@@ -103,10 +103,15 @@ let memes = fetch("https://meme-api.com/gimme/5")
 
       // Voeg de afbeelding, titel en URL toe aan de kaart
       let image = document.createElement("img");
+
       image.src = meme.url;
+
       let title = document.createElement("p");
+
       title.textContent = meme.title;
+
       let url = document.createElement("p");
+      
       url.innerHTML = meme.postLink;
 
       // Voeg de elementen toe aan de kaart en vervolgens aan de container
@@ -172,5 +177,5 @@ let bitcoins = [
     value: 40604,
     date: "11 dec",
   },
-  {}
+  {},
 ];
