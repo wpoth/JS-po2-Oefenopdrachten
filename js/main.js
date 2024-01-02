@@ -111,7 +111,7 @@ let memes = fetch("https://meme-api.com/gimme/5")
       title.textContent = meme.title;
 
       let url = document.createElement("p");
-      
+
       url.innerHTML = meme.postLink;
 
       // Voeg de elementen toe aan de kaart en vervolgens aan de container
@@ -167,15 +167,150 @@ function displayCards(data) {
   });
 }
 
-// Haal de gegevens op bij het laden van de pagina
 fetchData();
 
 // oefenopdrachten deel 2
 
-let bitcoins = [
-  {
-    value: 40604,
-    date: "11 dec",
-  },
-  {},
+// Array met bitcoinwaarden in euro's van de afgelopen 7 dagen en bijbehorende datums
+const bitcoinData = [
+  { waarde: 40604, datum: "11 dec" },
+  { waarde: 40648, datum: "12 dec" },
+  { waarde: 38275, datum: "13 dec" },
+  { waarde: 30386, datum: "14 dec" },
+  { waarde: 39445, datum: "15 dec" },
+  { waarde: 39121, datum: "16 dec" },
+  { waarde: 38494, datum: "17 dec" },
 ];
+
+// Variabelen om de hoogste en laagste waarde bij te houden
+let hoogsteWaarde = bitcoinData[0].waarde;
+let laagsteWaarde = bitcoinData[0].waarde;
+let totaleWaarde = 0;
+
+// Bereken gemiddelde, hoogste en laagste waarde met een for-loop
+for (let i = 0; i < bitcoinData.length; i++) {
+  const huidigeWaarde = bitcoinData[i].waarde;
+  totaleWaarde += huidigeWaarde;
+
+  if (huidigeWaarde > hoogsteWaarde) {
+    hoogsteWaarde = huidigeWaarde;
+  }
+
+  if (huidigeWaarde < laagsteWaarde) {
+    laagsteWaarde = huidigeWaarde;
+  }
+}
+
+const gemiddeldeWaarde = totaleWaarde / bitcoinData.length;
+
+// Resultaten tonen
+console.log(
+  "Gemiddelde bitcoinwaarde: " + gemiddeldeWaarde + " euro"
+);
+console.log("Hoogste bitcoinwaarde: " + hoogsteWaarde + " euro");
+console.log("Laagste bitcoinwaarde: " + laagsteWaarde + " euro");
+
+
+// opdr 2
+
+let beroepen = [
+  { beroep: 'Apotheker', beginsalaris: 3450 },
+  { beroep: 'Automonteur', beginsalaris: 2000 },
+  { beroep: 'Bouwvakker', beginsalaris: 1650 },
+  { beroep: 'Elektricien', beginsalaris: 2200 },
+  { beroep: 'Kinderopvang', beginsalaris: 1890 },
+  { beroep: 'Metselaar', beginsalaris: 2400 },
+  { beroep: 'Timmerman', beginsalaris: 2300 }
+];
+
+let totaalSalaris = 0;
+let hoogsteSalaris = beroepen[0].beginsalaris;
+let laagsteSalaris = beroepen[0].beginsalaris;
+let bestBetaaldBeroep = '';
+let minstBetaaldBeroep = '';
+
+for (let i = 0; i < beroepen.length; i++) {
+  let huidigSalaris = beroepen[i].beginsalaris;
+  totaalSalaris += huidigSalaris;
+
+  if (huidigSalaris > hoogsteSalaris) {
+      hoogsteSalaris = huidigSalaris;
+      bestBetaaldBeroep = beroepen[i].beroep;
+  }
+
+  if (huidigSalaris < laagsteSalaris) {
+      laagsteSalaris = huidigSalaris;
+      minstBetaaldBeroep = beroepen[i].beroep;
+  }
+}
+
+let gemiddeldSalaris = totaalSalaris / beroepen.length;
+
+console.log("Totaal salaris van alle beroepen: " + totaalSalaris + " euro");
+console.log("Gemiddelde salaris: " + gemiddeldSalaris + " euro");
+console.log("Best betaalde beroep: " + bestBetaaldBeroep + " met salaris van " + hoogsteSalaris + " euro");
+console.log("Minst betaalde beroep: " + minstBetaaldBeroep + " met salaris van " + laagsteSalaris + " euro");
+
+
+// opdr 3 
+
+// Verkrijg referenties naar de elementen met querySelectors
+const usernameInput = document.querySelector('.username');
+const emailInput = document.querySelector('.email');
+const sendButton = document.querySelector('.sendButton');
+
+// Voeg event listener toe aan de Send-button11
+sendButton.addEventListener('click', function() {
+    // Controleer gebruikersnaam
+    if (usernameInput.value.length < 3) {
+        usernameInput.classList.add('error');
+    } else {
+        usernameInput.classList.remove('error');
+        usernameInput.classList.add('success');
+    }
+
+    // Controleer e-mail
+    if (emailInput.value === '') {
+        emailInput.classList.add('error');
+    } else {
+        emailInput.classList.remove('error');
+        emailInput.classList.add('success');
+    }
+});
+
+
+// opd 4 
+
+const cardContainer = document.querySelector('.card-container');
+
+fetch('https://fakestoreapi.com/products')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(product => {
+            const card = document.createElement('div');
+            card.classList.add('card2'); // Naam gewijzigd naar card2
+
+            const image = document.createElement('img');
+            image.src = product.image;
+            image.alt = product.title;
+
+            const title = document.createElement('h2');
+            title.textContent = product.title;
+
+            const description = document.createElement('p');
+            description.textContent = product.description;
+
+            const price = document.createElement('p');
+            price.textContent = 'Prijs: ' + product.price + ' euro';
+
+            card.appendChild(image);
+            card.appendChild(title);
+            card.appendChild(description);
+            card.appendChild(price);
+
+            cardContainer.appendChild(card); // Toevoegen aan cardContainer
+        });
+    })
+    .catch(error => {
+        console.log('Er is een fout opgetreden bij het ophalen van de data:', error);
+    });

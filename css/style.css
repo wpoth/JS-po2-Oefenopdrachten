@@ -67,3 +67,44 @@
 .Alabama {
   border: 2px solid purple;
 }
+
+
+/* Standaard stijl voor inputvelden */
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+/* Rode rand klasse voor foutieve input */
+.error {
+  border: 1px solid red;
+}
+
+/* Groene rand klasse voor correcte input */
+.success {
+  border: 1px solid green;
+}
+
+
+/* Stijl voor de kaarten */
+.card2 {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  display: inline-block;
+}
+
+.card2 img {
+  max-width: 150px;
+  height: auto;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
